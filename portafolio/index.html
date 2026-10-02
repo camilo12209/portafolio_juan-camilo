@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Portafolio - Juan Camilo Henao</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 1200px;
+            list-style: none;
+        }
+
+        .tarjeta-individual {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tarjeta-individual:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .tarjeta {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tarjeta-puntos {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .tarjeta-personaje {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        h2 {
+            font-size: 1.15rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        ul ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 6px;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: #334155;
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        .btn-github {
+            background-color: #24292e;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+        }
+
+        /* Estilos del Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-contenido {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .cerrar-modal:hover {
+            color: var(--text-main);
+        }
+
+        .modal-contenido h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-top: 16px;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portafolio - Juan Camilo Henao</h1>
+    </header>
+
+    <!-- Contenedor principal de tarjetas -->
+    <ul class="contenedor">
+        
+        <!-- Tarjeta 1: Inicio -->
+        <li class="tarjeta-individual">
+            <article class="tarjeta">
+                <div class="tarjeta-puntos">
+                    <img src="img/image.png" alt="Foto de Juan Camilo Henao" class="tarjeta-personaje">
+                </div>
+                <div>
+                    <h2>INICIO</h2>
+                    <p><strong>Juan Camilo Henao</strong></p>
+                    <p>Desarrollador & Técnico en Sistemas</p>
+                    <p style="font-style: italic; margin-top: 6px;">"Transformando problemas técnicos en soluciones eficientes y escalables."</p>
+                    <div class="acciones" style="margin-top: 14px;">
+                        <a href="#proyectos" class="btn btn-primary">Proyectos</a>
+                        <a href="#contacto" class="btn btn-secondary">Contacto</a>
+                    </div>
+                </div>
+            </article>
+        </li>
+
+        <!-- Tarjeta 2: Quién soy y Sobre mí -->
+        <li class="tarjeta-individual">
+            <article class="tarjeta">
+                <div>
+                    <h2>Quién soy / Sobre mí</h2>
+                    <p><strong>Presentación:</strong> Apasionado por la tecnología, el funcionamiento interno de los sistemas computacionales y la resolución analítica de fallas técnicas.</p>
+                    <p><strong>Autobiografía:</strong> Técnico enfocado en el desarrollo de software frontend, mantenimiento físico de equipos de cómputo y optimización avanzada.</p>
+                </div>
+            </article>
+        </li>
+
+        <!-- Tarjeta 3: Tecnologías -->
+        <li class="tarjeta-individual">
+            <article class="tarjeta">
+                <div>
+                    <h2>Tecnologías</h2>
+                    <ul>
+                        <li><strong>Frontend:</strong> HTML5, CSS3, Flexbox, Diseño Responsivo.</li>
+                        <li><strong>Backend:</strong> Lógica computacional y bases de datos.</li>
+                        <li><strong>Herramientas:</strong> Git, GitHub, VS Code, Terminal.</li>
+                    </ul>
+                </div>
+            </article>
+        </li>
+
+        <!-- Tarjeta 4: Habilidades & Formación -->
+        <li class="tarjeta-individual">
+            <article class="tarjeta">
+                <div>
+                    <h2>Habilidades & Formación</h2>
+                    <p><strong>Habilidades:</strong> Ensamblaje de hardware, formateo de dispositivos móviles, adaptabilidad y trabajo bajo presión.</p>
+                    <p><strong>Formación:</strong> Programación de software, arquitectura de sistemas y soporte técnico especializado.</p>
+                </div>
+            </article>
+        </li>
+
+        <!-- Tarjeta 5: Experiencia & Logros -->
+        <li class="tarjeta-individual">
+            <article class="tarjeta">
+                <div>
+                    <h2>Experiencia & Logros</h2>
+                    <p><strong>Experiencia:</strong> Diagnóstico y reparación de equipos informáticos, maquetación de interfaces web modulares.</p>
+                    <p><strong>Logros:</strong> Recuperación de equipos críticos, despliegue exitoso de portafolios interactivos.</p>
+                </div>
+            </article>
+        </li>
+
+        <!-- Tarjeta 6: Proyectos, GitHub, CV y Contacto -->
+        <li class="tarjeta-individual" id="proyectos">
+            <article class="tarjeta">
+                <div>
+                    <h2>Proyectos, GitHub & CV</h2>
+                    <p>Repositorios con control de versiones y commits organizados.</p>
+                    <div class="acciones" id="contacto" style="margin-top: 14px;">
+                        <a href="https://github.com" target="_blank" class="btn btn-github"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://wa.me/573112218443" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <button onclick="abrirCV()" class="btn btn-secondary"><i class="fas fa-file-alt"></i> Ver CV</button>
+                    </div>
+                </div>
+            </article>
+        </li>
+
+    </ul>
+
+    <!-- Ventana Modal para el CV -->
+    <div id="modalCV" class="modal">
+        <div class="modal-contenido">
+            <button class="cerrar-modal" onclick="cerrarCV()">&times;</button>
+            <h2 style="border: none; padding: 0; margin-bottom: 10px;">Currículum Vítae</h2>
+            <p><strong>Juan Camilo Henao</strong></p>
+            <p style="margin-top: 6px;"><strong>Perfil Profesional:</strong> Técnico en Sistemas y Desarrollador Software Junior enfocado en crear experiencias web óptimas y soporte técnico integral de hardware/software.</p>
+            
+            <h3>Experiencia Destacada</h3>
+            <p>• Mantenimiento preventivo y correctivo de equipos de cómputo.</p>
+            <p>• Desarrollo de interfaces web responsivas con HTML y CSS.</p>
+
+            <h3>Educación & Certificaciones</h3>
+            <p>• Técnico en Sistemas / Desarrollo de Software.</p>
+
+            <div style="margin-top: 20px; text-align: right;">
+                <button onclick="cerrarCV()" class="btn btn-primary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirCV() {
+            document.getElementById('modalCV').style.display = 'flex';
+        }
+
+        function cerrarCV() {
+            document.getElementById('modalCV').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('modalCV');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
